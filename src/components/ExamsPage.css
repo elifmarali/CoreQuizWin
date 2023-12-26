@@ -1,0 +1,30 @@
+.examsContainer {
+    background-image: url("../images/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-position: right;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.exam {
+    background-color: #043162;
+    color: lightgray;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 300ms ease-in-out;
+}
+
+.exam:hover {
+    color: aliceblue;
+    background-color: rgb(36, 36, 36);
+    transform: scale(1.01);
+}

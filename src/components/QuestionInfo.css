@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+.questionInfoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: aliceblue;
+  height: 85vh;
+  background-image: linear-gradient(180deg, #22c997, #30e6b0, #fff);
+  padding: 20px;
+}
+.head{
+    font-size: 40px;
+    color: aliceblue;
+    font-weight: 700;
+}
+.section {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 0px 10px;
+  background-color: #fff;
+  border-radius: 20px;
+  height: 80vh;
+  width: 70vw;
+  padding: 20px 60px;
+}
+.cizgi {
+  border: 0.4px solid lightgray;
+  height: 40vh;
+}
+
+.leftSectionHeader {
+font-family: 'Abril Fatface', serif;
+  font-size: 70px;
+  font-weight: 500;
+  color: #021B35;
+}
+.rightSectionItem{
+font-size: 15px;
+font-weight: 100;
+color: #064990;
+}
+.questionInfoButton{
+   background-color: #021B35;
+   color: #fff;
+   padding: 20px 60px;
+border: 1.8px solid #021B35;
+border-radius: 20px;
+font-size: 20px;
+transition: 400ms all;
+}
+.questionInfoButton:hover{
+    background-color: #064990;
+   transform: scale(1.05);
+}
