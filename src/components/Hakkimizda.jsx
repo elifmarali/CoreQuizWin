@@ -10,7 +10,7 @@ function Hakkimizda() {
           <h1 className="aboutHead">Hakkımızda</h1>
 
           <div className="section">
-            <h2>Misyonumuz ve Vizyonumuz</h2>
+            <h2 className="abouth2">Misyonumuz ve Vizyonumuz</h2>
             <p>
               &emsp;&ensp;CoreQuiz, interaktif bir sınav platformudur. Kurumlar,
               çalışanlarına özel sınavlar düzenleyebilir ve başarıya ulaşan
@@ -21,7 +21,7 @@ function Hakkimizda() {
           </div>
 
           <div className="section">
-            <h2>Ekip</h2>
+            <h2 className="abouth2">Ekip</h2 >
             <ul>
               <li>Doğukan MUSLUKÇU&nbsp; - &nbsp;Back-End</li>
               <li>Berke ÇELİKEL&nbsp; - &nbsp;Back-End</li>
@@ -32,7 +32,7 @@ function Hakkimizda() {
           </div>
 
           <div className="section">
-            <h2>Ekibin Geçmiş Başarılar</h2>
+            <h2 className="abouth2">Ekibin Geçmiş Başarılar</h2 >
             <p>
               &emsp;&ensp;"Boodle" planlama projesi ile Yasemin Hoca'nın
               dersinden başarıyla geçmek :
@@ -41,7 +41,7 @@ function Hakkimizda() {
           </div>
 
           <div className="section">
-            <h2>İletişim Bilgileri</h2>
+            <h2 className="abouth2">İletişim Bilgileri</h2>
             <ul>
               <li>Doğukan MUSLUKÇU&nbsp; - &nbsp;202003011008</li>
               <li>Berke ÇELİKEL&nbsp; - &nbsp;202003011027</li>

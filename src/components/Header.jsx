@@ -6,19 +6,20 @@ import ExamsContext from "../context/ExamsContext";
 import AuthContext from "../context/AuthContext";
 
 const Header = () => {
-  const navigate =useNavigate()
+  const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const { allExams, clickExam } = useContext(ExamsContext);
 
   useEffect(() => {
-    const username = AuthService.getUsernameFromToken(); // Yeni eklenen fonksiyonu kullan
-    setCurrentUser(username); // Eğer username varsa onu, yoksa user'ı kullan
+    const username = AuthService.getUsernameFromToken();
+    setCurrentUser(username);
   }, []);
 
   const handleLogout = () => {
     AuthService.logout();
     setCurrentUser(null);
   };
+
   const handleClickExam = (examId) => {
     if (currentUser) {
       clickExam(examId);
@@ -44,7 +45,7 @@ const Header = () => {
             </button>
             <div className="submenu">
               <ul>
-                {allExams !== undefined ? (
+                {allExams !== null && allExams !== undefined ? (
                   allExams.map((exam) => {
                     return (
                       <li key={exam.id}>

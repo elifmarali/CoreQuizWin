@@ -11,10 +11,9 @@ import ExamsPage from "./components/ExamsPage";
 import Question from "./components/Question";
 import QuestionInfo from "./components/QuestionInfo";
 import { useContext } from "react";
-import ExamsContext from "./context/ExamsContext";
+
 
 function App() {
-  const { examId, questionId } = useContext(ExamsContext);
   return (
     <Router>
       <Routes>
@@ -24,7 +23,7 @@ function App() {
         <Route path="/about" element={<Hakkimizda />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/question/:examId/:questionId" element={<Question />} />
+        <Route path="/question/:examID/:questionID" element={<Question />} />
         <Route path="/questionInfo" element={<QuestionInfo />} />
         <Route path="/footer" element={<Footer />} />
       </Routes>

@@ -1,20 +1,36 @@
+// ExamsContext.jsx
 import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import AuthContext from "./AuthContext";
-// Context oluştur
+
 const ExamsContext = createContext();
 
-// Provider bileşeni oluştur
 export const ExamsProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext);
   const EXAMS_API_URL = "https://localhost:44309/api/exams/";
   const QUESTION_API_URL = "https://localhost:44309/api/question/";
-  const [allExams, setAllExams] = useState(); //tum sinavlarin listesi 
-  const [questions, setQuestions] = useState(); // secilen sinavin ilk sorusu 
-  const [questionName,setQuestionName]=useState(); // secilen sinavin adi
-  const[examId,setExamId]=useState(); //secilen sinavin id si
-  const [questionIndex, setQuestionIndex] = useState(); // secilen sinavin ilk sorusunun id si
-  const [questionLastIndex,setQuestionLastIndex]=useState(); // secilen sinavin icinde kac soru bulundugu
+
+  const [allExams, setAllExams] = useState(); // Tüm sınavların listesi
+  const [questions, setQuestions] = useState(); // Seçilen sınavın ilk sorusu
+  const [questionName, setQuestionName] = useState(); // Seçilen sınavın adı
+  const [examId, setExamId] = useState(); // Seçilen sınavın ID'si
+  const [questionIndex, setQuestionIndex] = useState(); // Seçilen sınavın ilk sorusunun ID'si
+  const [questionLastIndex, setQuestionLastIndex] = useState(); // Seçilen sınavın içinde kaç soru bulunduğu
+  const [questionIdArray, setQuestionIdArray] = useState([]);
+  const [currentQuestion, setCurrentQuestion] = useState(1); // currentQuestion'ı ekledim
+  const [questionThis, setQuestionThis] = useState(true); // setQuestionThis ekledim
+//eger bir sinav secildikten sonra farkli bir sinav secilirse tum tutulan sinavla iligli stateler sifirlanir
+   useEffect(() => {
+    if (examId !== null) {
+      setAllExams(null);
+      setQuestions(null);
+      setQuestionName(null);
+      setQuestionIndex(null);
+      setQuestionLastIndex(null);
+      setQuestionIdArray([]);
+    }
+  }, [examId]); 
+//proje acilisinda tum sinav isimleri setAllExams de tutulur ve bu sekilde header ve examsPage componentlerinde sinav isimleri listelenir
   useEffect(() => {
     const fetchExamNames = async () => {
       try {
@@ -26,7 +42,8 @@ export const ExamsProvider = ({ children }) => {
       }
     };
     fetchExamNames();
-  }, []);
+  }, [examId]);
+// examsPage ya da headerdaki sinav listelerinden bir sinav secilirse bu sinava ait bilgiler statelerde tutulur
   const clickExam = async (id) => {
     if (currentUser) {
       setExamId(id);
@@ -34,13 +51,19 @@ export const ExamsProvider = ({ children }) => {
         const indexResponse = await axios.get(
           EXAMS_API_URL + `getExamDetailsById?Id=${id}`
         );
-        const newIndex = indexResponse.data.data[0].questions[0].id;
-        setQuestionIndex(newIndex);
-        setQuestionLastIndex(indexResponse.data.data.length);
+
+        const questionIds = indexResponse.data.data.map(
+          (question) => question.questions[0].id
+        );
+
+        setQuestionIdArray(questionIds);
+        setQuestionIndex(questionIds[0]);
+        setQuestionLastIndex(questionIds.length);
         setQuestionName(indexResponse.data.data[0].examName);
+
         const response = await axios.get(
           QUESTION_API_URL +
-            `getQuestionDetailsByExamId?examId=${id}&questionId=${newIndex}`
+            `getQuestionDetailsByExamId?examId=${id}&questionId=${questionIds[0]}`
         );
         setQuestions(response.data.data);
       } catch (err) {
@@ -49,16 +72,37 @@ export const ExamsProvider = ({ children }) => {
     }
   };
 
+  const nextQuestion = async () => {
+    try {
+        const nextQuestionId = questionIdArray[currentQuestion];
+        setQuestionIndex(nextQuestionId)
+        const response = await axios.get(
+          QUESTION_API_URL +
+            `getQuestionDetailsByExamId?examId=${examId}&questionId=${nextQuestionId}`
+        );
+        setQuestions(response.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const sharedValuesAndMethods = {
     allExams,
     clickExam,
-setQuestionIndex,
-questionIndex,
+    setQuestionIndex,
+    questionIndex,
     questions,
     questionLastIndex,
     questionName,
     examId,
+    questionIdArray,
+    nextQuestion,
+    currentQuestion,
+    setCurrentQuestion,
+    questionThis,
+    setQuestionThis, 
   };
+
   return (
     <ExamsContext.Provider value={sharedValuesAndMethods}>
       {children}
