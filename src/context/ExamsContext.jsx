@@ -6,7 +6,7 @@ import AuthContext from "./AuthContext";
 const ExamsContext = createContext();
 
 export const ExamsProvider = ({ children }) => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser,currentUserId } = useContext(AuthContext);
   const EXAMS_API_URL = "https://localhost:44309/api/exams/";
   const QUESTION_API_URL = "https://localhost:44309/api/question/";
 
@@ -19,8 +19,11 @@ export const ExamsProvider = ({ children }) => {
   const [questionIdArray, setQuestionIdArray] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(1); // currentQuestion'ı ekledim
   const [questionThis, setQuestionThis] = useState(true); // setQuestionThis ekledim
-//eger bir sinav secildikten sonra farkli bir sinav secilirse tum tutulan sinavla iligli stateler sifirlanir
-   useEffect(() => {
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+
+
+  //eger bir sinav secildikten sonra farkli bir sinav secilirse tum tutulan sinavla iligli stateler sifirlanir
+  useEffect(() => {
     if (examId !== null) {
       setAllExams(null);
       setQuestions(null);
@@ -29,8 +32,8 @@ export const ExamsProvider = ({ children }) => {
       setQuestionLastIndex(null);
       setQuestionIdArray([]);
     }
-  }, [examId]); 
-//proje acilisinda tum sinav isimleri setAllExams de tutulur ve bu sekilde header ve examsPage componentlerinde sinav isimleri listelenir
+  }, [examId]);
+  //proje acilisinda tum sinav isimleri setAllExams de tutulur ve bu sekilde header ve examsPage componentlerinde sinav isimleri listelenir
   useEffect(() => {
     const fetchExamNames = async () => {
       try {
@@ -43,7 +46,8 @@ export const ExamsProvider = ({ children }) => {
     };
     fetchExamNames();
   }, [examId]);
-// examsPage ya da headerdaki sinav listelerinden bir sinav secilirse bu sinava ait bilgiler statelerde tutulur
+
+  // examsPage ya da headerdaki sinav listelerinden bir sinav secilirse bu sinava ait bilgiler statelerde tutulur
   const clickExam = async (id) => {
     if (currentUser) {
       setExamId(id);
@@ -55,7 +59,6 @@ export const ExamsProvider = ({ children }) => {
         const questionIds = indexResponse.data.data.map(
           (question) => question.questions[0].id
         );
-
         setQuestionIdArray(questionIds);
         setQuestionIndex(questionIds[0]);
         setQuestionLastIndex(questionIds.length);
@@ -74,17 +77,20 @@ export const ExamsProvider = ({ children }) => {
 
   const nextQuestion = async () => {
     try {
-        const nextQuestionId = questionIdArray[currentQuestion];
-        setQuestionIndex(nextQuestionId)
-        const response = await axios.get(
-          QUESTION_API_URL +
-            `getQuestionDetailsByExamId?examId=${examId}&questionId=${nextQuestionId}`
-        );
-        setQuestions(response.data.data);
+      const nextQuestionId = questionIdArray[currentQuestion];
+      setQuestionIndex(nextQuestionId);
+      const response = await axios.get(
+        QUESTION_API_URL +
+          `getQuestionDetailsByExamId?examId=${examId}&questionId=${nextQuestionId}`
+      );
+      setQuestions(response.data.data);
     } catch (err) {
       console.log(err);
     }
   };
+
+console.log("Kullanici id",currentUserId, "sinav id",examId, "question id",questionIndex,"isaretlenen cevap",selectedAnswer)
+
 
   const sharedValuesAndMethods = {
     allExams,
@@ -100,7 +106,9 @@ export const ExamsProvider = ({ children }) => {
     currentQuestion,
     setCurrentQuestion,
     questionThis,
-    setQuestionThis, 
+    setQuestionThis,
+    selectedAnswer,
+    setSelectedAnswer,
   };
 
   return (

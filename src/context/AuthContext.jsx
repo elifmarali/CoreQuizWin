@@ -1,24 +1,29 @@
-import axios from "axios";
+// AuthContext.js
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/authServices";
 
-// Context oluştur
 const AuthContext = createContext();
 
-// Provider bileşeni oluştur
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [currentUserId, setCurrentUserId] = useState(null);
 
   useEffect(() => {
-    const username = AuthService.getUsernameFromToken(); // Yeni eklenen fonksiyonu kullan
-    setCurrentUser(username); // Eğer username varsa onu, yoksa user'ı kullan
+    const username = AuthService.getUsernameFromToken();
+    const userId = AuthService.getCurrentUserIdFromToken();
+
+    setCurrentUser(username);
+    setCurrentUserId(userId);
   }, []);
 
-
   const sharedValuesAndMethods = {
-  currentUser,setCurrentUser
+    currentUser,
+    setCurrentUser,
+    currentUserId,
+    setCurrentUserId,
   };
+
   return (
     <AuthContext.Provider value={sharedValuesAndMethods}>
       {children}

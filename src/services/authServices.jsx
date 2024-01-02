@@ -63,9 +63,21 @@ class AuthService {
       
       // Token içindeki istediğiniz talebe ulaşarak kullanıcı adını alabilirsiniz
       const username = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
-      // const userID = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
-      // console.log("UserID:", userID);
       return username || null;
+    }
+    return null;
+  }
+  getCurrentUserIdFromToken() {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user && user.data && user.data.token) {
+      const token = user.data.token;
+      const decodedToken = jwtDecode(token);
+
+      // Token içindeki talepler aracılığıyla kullanıcı ID'sini alabilirsiniz
+      const userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+
+      return userId || null;
     }
     return null;
   }

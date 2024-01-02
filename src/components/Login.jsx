@@ -4,8 +4,10 @@ import "./Login.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AuthService from "../services/authServices";
+import AuthContext from "../context/AuthContext";
 
 function Login() {
+  const { currentUserId,setCurrentUserId} = useContext(AuthContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,6 +53,8 @@ function Login() {
         toast.success("Giriş Başarılı!");
         setTimeout(() => {
           navigate("/");
+          const userId= AuthService. getCurrentUserIdFromToken();
+          setCurrentUserId(userId);
         }, 150);
       } else {
         toast.error("Giriş Başarısız! Lütfen tekrar deneyin.");

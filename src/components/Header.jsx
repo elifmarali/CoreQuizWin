@@ -7,7 +7,7 @@ import AuthContext from "../context/AuthContext";
 
 const Header = () => {
   const navigate = useNavigate();
-  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const { currentUser, setCurrentUser,currentUserId,setCurrentUserId} = useContext(AuthContext);
   const { allExams, clickExam } = useContext(ExamsContext);
 
   useEffect(() => {
@@ -18,6 +18,7 @@ const Header = () => {
   const handleLogout = () => {
     AuthService.logout();
     setCurrentUser(null);
+    setCurrentUserId(null)
   };
 
   const handleClickExam = (examId) => {
