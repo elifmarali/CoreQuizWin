@@ -26,6 +26,29 @@ function Question() {
   } = useContext(ExamsContext);
 
   useEffect(() => {
+    const squares = document.querySelectorAll(".square");
+    squares.forEach((square, index) => {
+      if (index+1 === currentQuestion) {
+        
+        square.style.backgroundColor = "#021B35"; 
+        square.style.fontSize= "18px"
+      }
+    });
+  }, [selectedAnswer]);
+
+  useEffect(() => {
+    const buttons = document.querySelectorAll(".questionOption");
+    buttons.forEach((button, index) => {
+      if (button.value === selectedAnswer) {
+        button.classList.add("questionOptionClick");
+      } else {
+        button.classList.remove("questionOptionClick");
+      }
+    });
+  }, [selectedAnswer]);
+
+
+  useEffect(() => {
     navigate(`/question/${examId}/${questionIndex}`);
   }, [currentQuestion, examId, questionIndex, navigate]);
 
@@ -63,43 +86,43 @@ function Question() {
       </h3>
       <div className="questionSectionContainer">
         <div className="questionLeftSection">
-          <div className="questionText">{questions[0].questionText}</div>
+          <div className="questionText">{questions?.questionText}</div>
           <div className="answerOptions">
             <button
               className="questionOption"
-              value={questions[0].answer1}
+              value={questions?.answer1}
               onClick={(e) => {
                 setSelectedAnswer(e.target.value);
               }}
             >
-              {questions[0].answer1}
+              {questions?.answer1}
             </button>
             <button
               className="questionOption"
-              value={questions[0].answer2}
+              value={questions?.answer2}
               onClick={(e) => {
                 setSelectedAnswer(e.target.value);
               }}
             >
-              {questions[0].answer2}
+              {questions?.answer2}
             </button>
             <button
               className="questionOption"
-              value={questions[0].answer3}
+              value={questions?.answer3}
               onClick={(e) => {
                 setSelectedAnswer(e.target.value);
               }}
             >
-              {questions[0].answer3}
+              {questions?.answer3}
             </button>
             <button
               className="questionOption"
-              value={questions[0].answer4}
+              value={questions?.answer4}
               onClick={(e) => {
                 setSelectedAnswer(e.target.value);
               }}
             >
-              {questions[0].answer4}
+              {questions?.answer4}
             </button>
           </div>
         </div>

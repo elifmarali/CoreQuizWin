@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import AuthService from "../services/authServices";
 import ExamsContext from "../context/ExamsContext";
 import AuthContext from "../context/AuthContext";
+import logo from '../images/Logo.webp';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -36,7 +37,8 @@ const Header = () => {
           navigate("/");
         }}
       >
-        CoreQuiz
+         <img src={logo} alt=""  width={70} height={70} style={{borderRadius:"10px"}} />
+
       </div>
       <div className="nav-list">
         <ul>

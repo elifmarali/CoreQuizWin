@@ -47,7 +47,7 @@
     padding-left: 24px;
     font-size: 16px;
     border-radius: 20px;
-    transition: 300ms ease-in-out;
+    transition: 300ms all;
 }
 .questionOption:hover{
     border: 1px solid #021B35;
@@ -94,4 +94,8 @@
     margin-top: 20px;
    position: relative;
    left:30vw;
+}
+
+.questionOptionClick{
+  border: 1px solid black;
 }

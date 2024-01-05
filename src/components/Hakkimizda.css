@@ -23,13 +23,13 @@ body {
     width: 100%;
   }
   
-  h1 {
+  .aboutHeader {
     border-bottom: 3px solid #2c3e50; 
     padding-bottom: 15px;
     font-size: 2em;
   }
   
-  h2, p, li, .section h2, .section li::before {
+  .aboutHead, p, .contactListItem, .section .aboutHead, .section .contactListItem::before {
     color: #fff; 
   }
   
@@ -42,11 +42,11 @@ body {
     padding: 0;
   }
   
-  .contactList li {
+  .contactList .contactListItem {
     margin-bottom: 10px;
   }
   
-  .section li::before {
+  .section .contactListItem::before {
     content: "•";
     margin-right: 10px;
     font-size: 1.2em;
