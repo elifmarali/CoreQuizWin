@@ -28,22 +28,22 @@ function Footer() {
     </ul>
 <div className="socialMedia">
       <div className="facebook">
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon icon={faFacebook} color="white"/>
         </a>
       </div>
       <div className="twitter">
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon icon={faTwitter} color="white"/>
         </a>
       </div>
       <div className="google">
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.google.com/" target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon icon={faGoogle} color="white"/>
         </a>
       </div>
       <div className="instagram">
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon icon={faInstagram} color="white"/>
         </a>
       </div>
