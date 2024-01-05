@@ -36,7 +36,6 @@ class AuthService {
         console.log("Başarılı:", response.data);
         if (response) {
           localStorage.setItem("user", JSON.stringify(response.data));
-          debugger;
         }
         return response.data;
       })
