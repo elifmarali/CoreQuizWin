@@ -6,7 +6,7 @@ import AuthContext from "./AuthContext";
 const ExamsContext = createContext();
 
 export const ExamsProvider = ({ children }) => {
-  const { currentUser,currentUserId } = useContext(AuthContext);
+  const { currentUser, currentUserId } = useContext(AuthContext);
   const EXAMS_API_URL = "https://localhost:44309/api/exams/";
   const QUESTION_API_URL = "https://localhost:44309/api/question/";
 
@@ -20,7 +20,7 @@ export const ExamsProvider = ({ children }) => {
   const [currentQuestion, setCurrentQuestion] = useState(1); // currentQuestion'ı ekledim
   const [questionThis, setQuestionThis] = useState(true); // setQuestionThis ekledim
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-
+  const [modal, setModal] = useState(false); // sonuc ekrani gosterilsin mi ?
 
   //eger bir sinav secildikten sonra farkli bir sinav secilirse tum tutulan sinavla iligli stateler sifirlanir
   useEffect(() => {
@@ -89,8 +89,16 @@ export const ExamsProvider = ({ children }) => {
     }
   };
 
-console.log("Kullanici id",currentUserId, "sinav id",examId, "question id",questionIndex,"isaretlenen cevap",selectedAnswer)
-
+  console.log(
+    "Kullanici id",
+    currentUserId,
+    "sinav id",
+    examId,
+    "question id",
+    questionIndex,
+    "isaretlenen cevap",
+    selectedAnswer
+  );
 
   const sharedValuesAndMethods = {
     allExams,
@@ -109,6 +117,9 @@ console.log("Kullanici id",currentUserId, "sinav id",examId, "question id",quest
     setQuestionThis,
     selectedAnswer,
     setSelectedAnswer,
+    modal,
+    setModal,
+    currentUserId
   };
 
   return (

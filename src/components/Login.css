@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300;1,400&display=swap');
 
-main {
+.loginMain {
     background-image: url("../images/background.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -16,9 +16,9 @@ main {
     justify-content: center;
 }
 
-section {
-    width: 350px;
-    height: 400px;
+.loginSection {
+    width: 430px;
+    height: 490px;
     background: hsla(212, 35%, 58%, 1);
 
     background: linear-gradient(90deg, hsla(212, 35%, 58%, 1) 0%, hsla(218, 32%, 80%, 1) 100%);
@@ -101,7 +101,7 @@ section {
     letter-spacing: 0.35em;
 }
 
-.buttonContainer {
+.loginButtonContainer{
     display: flex;
     justify-content: center;
 }
@@ -171,3 +171,4 @@ section {
     font-size: 16px;
     font-weight: 600;
 }
+

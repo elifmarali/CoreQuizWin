@@ -23,7 +23,34 @@ function Question() {
     questionThis,
     selectedAnswer,
     setSelectedAnswer,
+    currentUserId
   } = useContext(ExamsContext);
+
+  const [minute,setMinute]=useState(40);
+  const [second,setSecond]=useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (minute > 0) {
+        if (second > 0) {
+          setSecond(second - 1);
+        } else if (second === 0) {
+          setMinute(minute - 1);
+          setSecond(59);
+        }
+      } else if (minute === 0) {
+        if (second > 0) {
+          setSecond(second - 1);
+        } else {
+          clearInterval(interval);
+          navigate(`/result/${currentUserId}/${questionName}`);
+        }
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [minute, second, navigate]);
 
   useEffect(() => {
     const squares = document.querySelectorAll(".square");
@@ -81,9 +108,12 @@ function Question() {
   return (
     <div className="questionContainer">
       <ToastContainer />
-      <h3 className="questionHeader">
+<div className="questionHeaderAndTimer">
+<h3 className="questionHeader">
         {questionName} {currentQuestion} \ {questionLastIndex}
       </h3>
+      <div className="timeSection">{minute>=10 ? minute : `0${minute}`}:{second>=10 ? second : `0${second}`}</div>
+</div>
       <div className="questionSectionContainer">
         <div className="questionLeftSection">
           <div className="questionText">{questions?.questionText}</div>

@@ -51,9 +51,9 @@ function Register() {
   };
 
   return (
-    <main>
+    <main className="registerMain">
       <ToastContainer />
-      <section>
+      <section className="registerSection">
         <div className="topSection">
           <span>Kayıt</span>Ol!
         </div>
@@ -93,7 +93,7 @@ function Register() {
           />
           <label htmlFor="password">Şifre</label>
         </div>
-        <div className="buttonContainer">
+        <div className="registerButtonContainer">
           <button onClick={handleRegisterClick} className="registerButton">
             Kayıt Ol
           </button>

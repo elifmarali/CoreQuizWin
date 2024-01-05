@@ -66,9 +66,9 @@ function Login() {
   };
 
   return (
-    <main>
+    <main className="loginMain">
       <ToastContainer />
-      <section>
+      <section className="loginSection">
         <div className="welcomeSection">
           <span className="hello">Merhaba!</span>
           <span>{timeMessage}</span>
@@ -94,7 +94,7 @@ function Login() {
           />
           <label htmlFor="password">Şifre</label>
         </div>
-        <div className="buttonContainer">
+        <div className="loginButtonContainer">
           <button onClick={handleClick} className="loginButton">
             Giriş Yap
           </button>

@@ -12,7 +12,27 @@
   flex-direction: column;
   padding:80px 150px;
 }
-
+.questionHeaderAndTimer{
+  display: flex;
+  width: 50vw;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.questionHeader{
+  color: #021B35;
+  font-weight: 700;
+}
+.timeSection{
+  background-color: #021B35;
+  color: #e2e2e2;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 10px;
+ width: 5vw;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
 .questionSectionContainer {
   display: flex;
   align-items: center;

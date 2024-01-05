@@ -11,7 +11,7 @@ import ExamsPage from "./components/ExamsPage";
 import Question from "./components/Question";
 import QuestionInfo from "./components/QuestionInfo";
 import { useContext } from "react";
-
+import Result from "./components/Result";
 
 function App() {
   return (
@@ -25,7 +25,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/question/:examID/:questionID" element={<Question />} />
         <Route path="/questionInfo" element={<QuestionInfo />} />
+        <Route path="/result/:userID/:examName" element={<Result/>}></Route>
         <Route path="/footer" element={<Footer />} />
+
       </Routes>
     </Router>
   );
