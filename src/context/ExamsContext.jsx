@@ -22,6 +22,7 @@ export const ExamsProvider = ({ children }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [modal, setModal] = useState(false); // sonuc ekrani gosterilsin mi ?
 
+
   //eger bir sinav secildikten sonra farkli bir sinav secilirse tum tutulan sinavla iligli stateler sifirlanir
   useEffect(() => {
     if (examId !== null) {
@@ -89,7 +90,22 @@ export const ExamsProvider = ({ children }) => {
     }
   };
 
-  console.log(
+  const answerPost= async(examId,questionId,userAnswer,userId)=> {
+    try{
+      const response = await axios.post(
+        QUESTION_API_URL+`checkUserPointWithQuestion?examId=${examId}&questionId=${questionId}&userAnswer=${userAnswer}&userId=${userId}`, {
+          examId:examId,
+          questionId:questionId,
+          userAnswer:userAnswer,
+          userId:userId
+        }
+      )
+    }catch(err){
+        console.log(err);
+    }
+  }
+
+/*   console.log(
     "Kullanici id",
     currentUserId,
     "sinav id",
@@ -99,7 +115,7 @@ export const ExamsProvider = ({ children }) => {
     "isaretlenen cevap",
     selectedAnswer
   );
-
+ */
   const sharedValuesAndMethods = {
     allExams,
     clickExam,
@@ -119,7 +135,8 @@ export const ExamsProvider = ({ children }) => {
     setSelectedAnswer,
     modal,
     setModal,
-    currentUserId
+    currentUserId,
+    answerPost
   };
 
   return (

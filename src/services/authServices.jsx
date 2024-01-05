@@ -1,7 +1,6 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
-
 const API_URL = "https://localhost:44309/api/auth/";
 
 class AuthService {
@@ -11,9 +10,10 @@ class AuthService {
         Email: email,
         Password: password,
       })
-      .then(response => {
+      .then((response) => {
         if (response) {
           localStorage.setItem("user", JSON.stringify(response.data));
+          this.getCurrentUserEnteredExams();
         }
         return response.data;
       });
@@ -31,7 +31,7 @@ class AuthService {
         Email: email,
         Password: password,
       })
-      .then(response => {
+      .then((response) => {
         // Başarılı durumda işlemleri burada yapabilirsiniz.
         console.log("Başarılı:", response.data);
         if (response) {
@@ -40,7 +40,7 @@ class AuthService {
         }
         return response.data;
       })
-      .catch(error => {
+      .catch((error) => {
         // Hata durumunda işlemleri burada yapabilirsiniz.
         console.error("Axios Error:", error);
 
@@ -50,19 +50,19 @@ class AuthService {
       });
   }
 
-
-
-
   getUsernameFromToken() {
     const user = JSON.parse(localStorage.getItem("user"));
     console.log(user); // DEBUG: user objesini kontrol et
- 
+
     if (user && user.data && user.data.token) {
       const token = user.data.token;
       const decodedToken = jwtDecode(token);
-      
+
       // Token içindeki istediğiniz talebe ulaşarak kullanıcı adını alabilirsiniz
-      const username = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+      const username =
+        decodedToken[
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+        ];
       return username || null;
     }
     return null;
@@ -75,14 +75,27 @@ class AuthService {
       const decodedToken = jwtDecode(token);
 
       // Token içindeki talepler aracılığıyla kullanıcı ID'sini alabilirsiniz
-      const userId = decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+      const userId =
+        decodedToken[
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+        ];
 
       return userId || null;
     }
     return null;
   }
- 
-}
 
+  getCurrentUserEnteredExams() {
+    if(this.getCurrentUserIdFromToken()!==null){
+      const getUserPointData = async () => {
+        const response = await axios.get(
+          `https://localhost:44309/api/Users/getbyid?id=${this.getCurrentUserIdFromToken()}`
+        );
+        return response.data.data.points;
+      };
+     return  getUserPointData()
+    }
+    }
+}
 
 export default new AuthService();

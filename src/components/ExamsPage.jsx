@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import Header from "./Header";
 import ExamsContext from "../context/ExamsContext";
 import "./ExamsPage.css";
@@ -7,13 +7,21 @@ import { useNavigate } from "react-router-dom";
 
 function ExamsPage() {
   const navigate = useNavigate();
-  const { allExams, clickExam,setCurrentQuestion } = useContext(ExamsContext);
-  const { currentUser } = useContext(AuthContext);
+  const { allExams, clickExam, setCurrentQuestion,currentUserId } = useContext(ExamsContext);
+  const { currentUser, currentUserPointsData } = useContext(AuthContext);
 
-  const handleClickExam = (examId) => {
+  const handleClickExam = (exam,examId) => {
     if (currentUser) {
-      clickExam(examId);
-      navigate("/questionInfo");
+      const { examName } = exam;
+
+      if (currentUserPointsData && currentUserPointsData[examName] !== undefined) {
+        // Eğer kullanıcı daha önce bu sınava girdiyse
+        navigate(`/result/${currentUserId}/${examName}`);
+      } else {
+        // Eğer kullanıcı daha önce bu sınava girmediyse
+        clickExam(examId);
+        navigate("/questionInfo");
+      }
     } else {
       navigate("/login");
     }
@@ -28,7 +36,7 @@ function ExamsPage() {
             className="exam"
             key={exam.id}
             onClick={() => {
-              handleClickExam(exam.id);
+              handleClickExam(exam,exam.id);
             }}
           >
             {exam.examName}{" "}

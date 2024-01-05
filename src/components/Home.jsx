@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Container, Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText, Button, CardGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css';
@@ -14,12 +14,19 @@ import safetySvg from '../svg/safety-supervision-svgrepo-com.svg';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useNavigate } from 'react-router-dom';
+import AuthContext from '../context/AuthContext.jsx';
+import AuthServices from '../services/authServices.jsx';
 
 function Home() {
+  const navigate=useNavigate();
+  const { currentUserPointsData } = useContext(AuthContext);
+
 useEffect(()=>{
 AOS.init({duration:"700"})
 },[])
-const navigate=useNavigate();
+
+
+console.log(currentUserPointsData);
   return (
     <div className="HomeContainer">
 <div className="topSectionHome">

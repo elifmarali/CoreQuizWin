@@ -8,7 +8,7 @@ import logo from '../images/Logo.webp';
 
 const Header = () => {
   const navigate = useNavigate();
-  const { currentUser, setCurrentUser,currentUserId,setCurrentUserId} = useContext(AuthContext);
+  const { currentUser, setCurrentUser,currentUserId,setCurrentUserId,currentUserPointsData,setCurrentUserPointsData} = useContext(AuthContext);
   const { allExams, clickExam } = useContext(ExamsContext);
 
   useEffect(() => {
@@ -16,18 +16,33 @@ const Header = () => {
     setCurrentUser(username);
   }, []);
 
+
+
+
+  const handleClickExam = (exam,examId) => {
+    if (currentUser) {
+      const { examName } = exam;
+
+      if (currentUserPointsData && currentUserPointsData[examName] !== undefined) {
+        // Eğer kullanıcı daha önce bu sınava girdiyse
+        navigate(`/result/${currentUserId}/${examName}`);
+      } else {
+        // Eğer kullanıcı daha önce bu sınava girmediyse
+        clickExam(examId);
+        navigate("/questionInfo");
+      }
+    } else {
+      navigate("/login");
+    }
+  };
   const handleLogout = () => {
     AuthService.logout();
     setCurrentUser(null);
-    setCurrentUserId(null)
+    setCurrentUserId(null);
+    setCurrentUserPointsData(null);
   };
 
-  const handleClickExam = (examId) => {
-    if (currentUser) {
-      clickExam(examId);
-      navigate("/questionInfo");
-    } else navigate("/login");
-  };
+
 
   return (
     <div className="header">
@@ -56,7 +71,7 @@ const Header = () => {
                           href="#"
                           key={exam.id}
                           onClick={() => {
-                            handleClickExam(exam.id);
+                            handleClickExam(exam,exam.id);
                           }}
                         >
                           {exam.examName}

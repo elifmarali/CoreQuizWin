@@ -1,5 +1,4 @@
-// Question.jsx
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ExamsContext from "../context/ExamsContext";
@@ -23,11 +22,13 @@ function Question() {
     questionThis,
     selectedAnswer,
     setSelectedAnswer,
-    currentUserId
+    currentUserId,
+    answerPost
   } = useContext(ExamsContext);
 
-  const [minute,setMinute]=useState(40);
-  const [second,setSecond]=useState(0);
+  const [minute, setMinute] = useState(0);
+  const [second, setSecond] = useState(5);
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (minute > 0) {
@@ -55,10 +56,9 @@ function Question() {
   useEffect(() => {
     const squares = document.querySelectorAll(".square");
     squares.forEach((square, index) => {
-      if (index+1 === currentQuestion) {
-        
-        square.style.backgroundColor = "#021B35"; 
-        square.style.fontSize= "18px"
+      if (index + 1 === currentQuestion) {
+        square.style.backgroundColor = "#021B35";
+        square.style.fontSize = "18px";
       }
     });
   }, [selectedAnswer]);
@@ -74,46 +74,50 @@ function Question() {
     });
   }, [selectedAnswer]);
 
-
   useEffect(() => {
     navigate(`/question/${examId}/${questionIndex}`);
   }, [currentQuestion, examId, questionIndex, navigate]);
 
   const handleClickNextQuestion = () => {
+    answerPost(examId, questionIndex, selectedAnswer, currentUserId);
     if (selectedAnswer === null || selectedAnswer === undefined) {
       console.error("HATA: Bir şık seçilmedi!");
       toast.error("Lütfen bir şık seçin!");
       return;
     }
-
     if (currentQuestion + 1 < questionIdArray.length) {
-      // Sorular henüz bitmediyse
-      console.log("Next question");
-      nextQuestion();
-     setSelectedAnswer(null);
       setCurrentQuestion((prev) => prev + 1);
       setQuestionThis(true);
+      nextQuestion();
+      setSelectedAnswer(null);
     } else if (currentQuestion + 1 === questionIdArray.length) {
-      // Sorular bittiyse
       setCurrentQuestion((prev) => prev + 1);
       setQuestionThis(false);
       nextQuestion();
-      setSelectedAnswer(null)
-      console.log("End of questions");
+      setSelectedAnswer(null);
     } else {
       console.error("HATA: Beklenmeyen durum!");
     }
   };
 
+  const handleClickQuizFinish = () => {
+    answerPost(examId, questionIndex, selectedAnswer, currentUserId);
+    setMinute(0);
+    setSecond(0);
+    navigate(`/result/${currentUserId}/${questionName}`);
+  };
+
   return (
     <div className="questionContainer">
       <ToastContainer />
-<div className="questionHeaderAndTimer">
-<h3 className="questionHeader">
-        {questionName} {currentQuestion} \ {questionLastIndex}
-      </h3>
-      <div className="timeSection">{minute>=10 ? minute : `0${minute}`}:{second>=10 ? second : `0${second}`}</div>
-</div>
+      <div className="questionHeaderAndTimer">
+        <h3 className="questionHeader">
+          {questionName} {currentQuestion} \ {questionLastIndex}
+        </h3>
+        <div className="timeSection">
+          {minute >= 10 ? minute : `0${minute}`}:{second >= 10 ? second : `0${second}`}
+        </div>
+      </div>
       <div className="questionSectionContainer">
         <div className="questionLeftSection">
           <div className="questionText">{questions?.questionText}</div>
@@ -172,7 +176,9 @@ function Question() {
           Sonraki Soru
         </button>
       ) : (
-        <button className="nextQuestionButton">Sinavi Bitir</button>
+        <button className="nextQuestionButton" onClick={handleClickQuizFinish}>
+          Sinavi Bitir
+        </button>
       )}
     </div>
   );

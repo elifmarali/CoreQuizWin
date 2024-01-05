@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 import ExamsPage from "./components/ExamsPage";
 import Question from "./components/Question";
 import QuestionInfo from "./components/QuestionInfo";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Result from "./components/Result";
 
 function App() {
@@ -27,7 +27,6 @@ function App() {
         <Route path="/questionInfo" element={<QuestionInfo />} />
         <Route path="/result/:userID/:examName" element={<Result/>}></Route>
         <Route path="/footer" element={<Footer />} />
-
       </Routes>
     </Router>
   );

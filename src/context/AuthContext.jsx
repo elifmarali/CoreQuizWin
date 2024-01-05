@@ -8,11 +8,16 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [currentUserId, setCurrentUserId] = useState(null);
+  const [currentUserPointsData,setCurrentUserPointsData]=useState({});
 
   useEffect(() => {
     const username = AuthService.getUsernameFromToken();
     const userId = AuthService.getCurrentUserIdFromToken();
-
+    const getCurrentUserPointData= async ()=>{
+      const response= await AuthService.getCurrentUserEnteredExams();
+      setCurrentUserPointsData(response);
+    }
+    getCurrentUserPointData()
     setCurrentUser(username);
     setCurrentUserId(userId);
   }, []);
@@ -22,6 +27,8 @@ export const AuthProvider = ({ children }) => {
     setCurrentUser,
     currentUserId,
     setCurrentUserId,
+    currentUserPointsData,
+    setCurrentUserPointsData
   };
 
   return (
