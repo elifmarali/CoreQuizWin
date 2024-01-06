@@ -51,7 +51,6 @@ class AuthService {
 
   getUsernameFromToken() {
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log(user); // DEBUG: user objesini kontrol et
 
     if (user && user.data && user.data.token) {
       const token = user.data.token;

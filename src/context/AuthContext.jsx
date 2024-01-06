@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
     getCurrentUserPointData()
     setCurrentUser(username);
     setCurrentUserId(userId);
-  }, []);
+  },[currentUserPointsData]);
 
   const sharedValuesAndMethods = {
     currentUser,

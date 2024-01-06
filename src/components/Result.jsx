@@ -18,26 +18,26 @@ function Result() {
     fetchData();
   }, [currentUserPointsData, examName]);
 
-  console.log(examScore);
-
   return (
     <main className="resultMain">
       <section className="resultSection">
         <div className="resultHeader">{examName} Sınavı</div>
         {examScore !== undefined ? (
-          <div className="resultPoint">Puanınız: {examScore}</div>
-        ) : (
-          <div className="resultPoint">Puanınız bekleniyor...</div>
-        )}
-        {examScore !== undefined && examScore >= 70 ? (
           <div>
-            <p>Tebrikler! Başarılı oldunuz.</p>
-            <a href="resim1.png" download>
-              Sertifika Dosyasını İndir
-            </a>
+            <div className="resultPoint">Puanınız: {examScore}</div>
+            {examScore >= 70 ? (
+              <div>
+                <p>Tebrikler! Başarılı oldunuz.</p>
+                <a href="resim1.png" download>
+                  Sertifika Dosyasını İndir
+                </a>
+              </div>
+            ) : (
+              <p>Maalesef barajı geçemediniz.</p>
+            )}
           </div>
         ) : (
-          <p>Maalesef barajı geçemediniz.</p>
+          <div className="resultPoint">Puanınız bekleniyor...</div>
         )}
         <div className="resultButtonContainer">
           <button onClick={() => navigate("/")} className="backHomeButton">
