@@ -26,8 +26,8 @@ function Question() {
     answerPost
   } = useContext(ExamsContext);
 
-  const [minute, setMinute] = useState(0);
-  const [second, setSecond] = useState(5);
+  const [minute, setMinute] = useState(40);
+  const [second, setSecond] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {

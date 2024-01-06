@@ -29,7 +29,7 @@ function Result() {
         ) : (
           <div className="resultPoint">Puanınız bekleniyor...</div>
         )}
-        {examScore !== undefined && examScore >= 50 ? (
+        {examScore !== undefined && examScore >= 70 ? (
           <div>
             <p>Tebrikler! Başarılı oldunuz.</p>
             <a href="resim1.png" download>
