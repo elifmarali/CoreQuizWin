@@ -8,6 +8,7 @@ import {
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import Header from './Header';
 import Footer from './Footer';
+import "./Comunicate.css";
 
 function Communicate() {
   const [open, setOpen] = useState('');
@@ -22,6 +23,7 @@ function Communicate() {
   const mapContainerStyle = {
     width: '100%',
     height: '400px',
+    borderRadius: ''
   };
 
   const position = {
@@ -30,10 +32,9 @@ function Communicate() {
   };
 
   return (
-    <div className='containerMap'>
+    <div>
       <Header/>
-
-      <div className='containerMapSection'>
+      <div className='containerMap'>
           <LoadScript googleMapsApiKey="AIzaSyBBO4nI7D5t0Db_42E8YXuqFezNV76OyR8">
             <GoogleMap className='mapContainerStyle'
               mapContainerStyle={mapContainerStyle}
