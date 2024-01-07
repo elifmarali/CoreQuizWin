@@ -98,6 +98,9 @@ const Header = () => {
               Hakkımızda
             </button>
           </li>
+          <li className="nav-item">
+            <button onClick={() => navigate("/comunicate")} className="nav-link">İletişim</button>
+          </li>
         </ul>
       </div>
       <div className="headerButtonsContainer">

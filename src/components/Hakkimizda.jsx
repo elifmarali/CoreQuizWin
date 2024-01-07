@@ -39,28 +39,10 @@ function Hakkimizda() {
             <h2 className="aboutHead">Ekibin Geçmiş Başarılar</h2>
             <p>&emsp;&ensp;"Boodle" planlama projesi</p>
             <p>&emsp;&ensp;Haber Sistemi</p>
+            <p>&emsp;&ensp;CoreMarket</p>
+            <p>&emsp;&ensp;YSoftHR System</p>
           </div>
-
-          <div className="section">
-            <h2 className="aboutHead">İletişim Bilgileri</h2>
-            <ul className="contactList">
-              <li className="contactListItem">
-                Doğukan MUSLUKÇU - 202003011008@dogus.edu.tr
-              </li>
-              <li className="contactListItem">
-                Berke ÇELİKEL - 202003011027@dogus.edu.tr
-              </li>
-              <li className="contactListItem">
-                Mehmet Fatih KARA - 202003011048@dogus.edu.tr
-              </li>
-              <li className="contactListItem">
-                Murat Özkan KAYA - 202003011036@dogus.edu.tr
-              </li>
-              <li className="contactListItem">
-                Elif MARALI - 202003011021@dogus.edu.tr
-              </li>
-            </ul>
-          </div>
+                    
         </div>
       </div>
       <Footer />

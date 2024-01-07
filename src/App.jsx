@@ -12,6 +12,7 @@ import Question from "./components/Question";
 import QuestionInfo from "./components/QuestionInfo";
 import { useContext, useEffect } from "react";
 import Result from "./components/Result";
+import Communicate from "./components/Comunicate";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/certificates" element={<Certificate />} />
+        <Route path="/comunicate" element={<Communicate />} />
         <Route path="/examsPage" element={<ExamsPage />} />
         <Route path="/about" element={<Hakkimizda />} />
         <Route path="/login" element={<Login />} />

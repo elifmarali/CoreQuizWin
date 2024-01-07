@@ -25,6 +25,9 @@ function Footer() {
               Hakkımızda
             </button>
           </li>
+          <li className="footerOption">
+            <button onClick={() => navigate("/comunicate")} className="nav-link">İletişim</button>
+          </li>
     </ul>
 <div className="socialMedia">
       <div className="facebook">
