@@ -13,12 +13,9 @@ function ExamsPage() {
   const handleClickExam = (exam,examId) => {
     if (currentUser) {
       const { examName } = exam;
-
       if (currentUserPointsData && currentUserPointsData[examName] !== undefined) {
-        // Eğer kullanıcı daha önce bu sınava girdiyse
         navigate(`/result/${currentUserId}/${examName}`);
       } else {
-        // Eğer kullanıcı daha önce bu sınava girmediyse
         clickExam(examId);
         navigate("/questionInfo");
       }

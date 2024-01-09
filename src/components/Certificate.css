@@ -9,7 +9,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 margin: 20px;
 }
 .certficate {
@@ -20,7 +19,7 @@ margin: 20px;
   padding: 40px;
   margin: auto;
   color: #fff;
-  background: #021b35;  /* fallback for old browsers */  
+  background: #021b35; 
   border: 1.5px solid #1d70c9;
   align-items: center;
   justify-content: center;
@@ -68,4 +67,5 @@ margin: 20px;
 width: 550px;
 height: 350px;
 border-radius: 20px;
+border: 1px solid lightgray;
 }

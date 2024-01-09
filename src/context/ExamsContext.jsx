@@ -16,14 +16,13 @@ export const ExamsProvider = ({ children }) => {
   const [examId, setExamId] = useState(); // Seçilen sınavın ID'si
   const [questionIndex, setQuestionIndex] = useState(); // Seçilen sınavın ilk sorusunun ID'si
   const [questionLastIndex, setQuestionLastIndex] = useState(); // Seçilen sınavın içinde kaç soru bulunduğu
-  const [questionIdArray, setQuestionIdArray] = useState([]);
+  const [questionIdArray, setQuestionIdArray] = useState([]); // secilen sinava ait sorularin id'lerinin tutuldugu array
   const [currentQuestion, setCurrentQuestion] = useState(1); // currentQuestion'ı ekledim
   const [questionThis, setQuestionThis] = useState(true); // setQuestionThis ekledim
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);//sinavda secilen şık
   const [modal, setModal] = useState(false); // sonuc ekrani gosterilsin mi ?
 
 
-  //eger bir sinav secildikten sonra farkli bir sinav secilirse tum tutulan sinavla iligli stateler sifirlanir
   useEffect(() => {
     if (examId !== null) {
       setAllExams(null);
@@ -34,7 +33,7 @@ export const ExamsProvider = ({ children }) => {
       setQuestionIdArray([]);
     }
   }, [examId]);
-  //proje acilisinda tum sinav isimleri setAllExams de tutulur ve bu sekilde header ve examsPage componentlerinde sinav isimleri listelenir
+
   useEffect(() => {
     const fetchExamNames = async () => {
       try {
@@ -48,7 +47,6 @@ export const ExamsProvider = ({ children }) => {
     fetchExamNames();
   }, [examId]);
 
-  // examsPage ya da headerdaki sinav listelerinden bir sinav secilirse bu sinava ait bilgiler statelerde tutulur
   const clickExam = async (id) => {
     if (currentUser) {
       setExamId(id);

@@ -45,7 +45,6 @@ function Login() {
 
   const handleClick = async (e) => {
     e.preventDefault();
-
     try {
       const loginResult = await AuthService.login(email, password);
       console.log("Login success:", loginResult);

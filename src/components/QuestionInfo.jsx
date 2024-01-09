@@ -40,7 +40,9 @@ function QuestionInfo() {
               <div className="questionInfoRightSection">
                 <nav className="questionInfoRightSectionTop">
                   <ul>
-                    <h4 className="rightSectionItem rightSectionItemfs">Tamamen Ücretsiz</h4>
+                    <h4 className="rightSectionItem rightSectionItemfs">
+                      Tamamen Ücretsiz
+                    </h4>
                     <h4 className="rightSectionItem rightSectionItemfs">
                       {questionName} Alanında Kendini Test Et!
                     </h4>
@@ -51,15 +53,17 @@ function QuestionInfo() {
                 </nav>
                 <nav className="questionInfoRightSectionBottom">
                   <ul>
-                    <h6>Sınav Kuralları</h6>
                     <h2 className="rightSectionItem">
                       Önceki soruya dönülemez.
                     </h2>
                     <h2 className="rightSectionItem">
-                      Yanlış cevaplar doğru cevapları götürmez.
+                      Yanlış cevaplar doğru cevapları etkilemez.
                     </h2>
                     <h2 className="rightSectionItem">
-                      Sınav zamanından önce bitirilmezse sayfa otomatik olarak kapanır. Önceki cevaplarınıza göre bir değerlendirme yapılır.
+                      Zamanında tamamlanmayan sınavlar otomatik olarak kapanır.
+                    </h2>
+                    <h2 className="rightSectionItem">
+                    İnternet veya elektronik arıza, yanlış çıkış durumunda değerlendirme yapılır, tekrar giriş izni verilmez.
                     </h2>
                   </ul>
                 </nav>
