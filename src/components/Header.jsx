@@ -109,7 +109,7 @@ const Header = () => {
             <button className="logOutButton" onClick={handleLogout}>
               Çıkış Yap
             </button>
-            <span className="userOptionsFullName">Merhaba, {currentUser}!</span>
+            <span className="userOptionsFullName" onClick={()=>{navigate(`/user/${currentUserId}`)}}>Merhaba, {currentUser}!</span>
           </div>
         ) : (
           <>
