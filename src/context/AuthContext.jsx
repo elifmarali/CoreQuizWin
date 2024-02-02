@@ -1,6 +1,4 @@
-// AuthContext.js
 import React, { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import AuthService from "../services/authServices";
 
 const AuthContext = createContext();
@@ -8,19 +6,23 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [currentUserId, setCurrentUserId] = useState(null);
-  const [currentUserPointsData,setCurrentUserPointsData]=useState({});
+  const [currentUserPointsData, setCurrentUserPointsData] = useState({});
 
   useEffect(() => {
-    const username = AuthService.getUsernameFromToken();
-    const userId = AuthService.getCurrentUserIdFromToken();
-    const getCurrentUserPointData= async ()=>{
-      const response= await AuthService.getCurrentUserEnteredExams();
+    const fetchData = async () => {
+      const username = AuthService.getUsernameFromToken();
+      const userId = AuthService.getCurrentUserIdFromToken();
+      setCurrentUser(username);
+      setCurrentUserId(userId);
+
+      const response = await AuthService.getCurrentUserEnteredExams();
       setCurrentUserPointsData(response);
-    }
-    getCurrentUserPointData()
-    setCurrentUser(username);
-    setCurrentUserId(userId);
-  },[]);
+    };
+
+    fetchData();
+  }, [currentUser]);
+
+
 
   const sharedValuesAndMethods = {
     currentUser,
@@ -28,8 +30,9 @@ export const AuthProvider = ({ children }) => {
     currentUserId,
     setCurrentUserId,
     currentUserPointsData,
-    setCurrentUserPointsData
+    setCurrentUserPointsData,
   };
+
 
   return (
     <AuthContext.Provider value={sharedValuesAndMethods}>

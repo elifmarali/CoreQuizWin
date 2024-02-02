@@ -27,6 +27,7 @@ import "aos/dist/aos.css";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext.jsx";
 import AuthServices from "../services/authServices.jsx";
+import ExamsContext from "../context/ExamsContext.jsx";
 
 function Home() {
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ function Home() {
       setFormattedName(formattedName);
     }
   }, [currentUser]);
+
 
   return (
     <div className="HomeContainer">

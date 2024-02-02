@@ -23,9 +23,14 @@ function Question() {
     selectedAnswer,
     setSelectedAnswer,
     currentUserId,
-    answerPost
+    answerPost,
+    setAllExams,
+    setQuestions,
+    setQuestionName,
+    setQuestionIndex,
+    setQuestionLastIndex,
+    setQuestionIdArray
   } = useContext(ExamsContext);
-
   const [minute, setMinute] = useState(40);
   const [second, setSecond] = useState(0);
 
@@ -105,7 +110,10 @@ function Question() {
     setMinute(0);
     setSecond(0);
     navigate(`/result/${currentUserId}/${questionName}`);
+    setCurrentQuestion(1);
+setQuestionThis(null);
   };
+  
 
   return (
     <div className="questionContainer">
